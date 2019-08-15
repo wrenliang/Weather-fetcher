@@ -8,13 +8,26 @@
 
 import Foundation
 
+
+
 enum DataManagerError: Error {
     case invalidURL;
 }
 
 final class DataManager {
     
+    var dataTaskCompletion: Bool {
+        didSet {
+            if let weather = weatherData {
+                let temp = weather.main.temperature
+                print(temp)
+                
+            }
+        }
+    }
+    
     init() {
+        self.dataTaskCompletion = false;
     }
     
     func createRetrievalURL(baseURL: String, APIKey: String, city: String) throws -> URL{
@@ -37,11 +50,10 @@ final class DataManager {
                 print("Boys we got an error!\n");
                 print(error);
             } else if let inData = data{
-                let weather = try! JSONDecoder().decode(AllData.self, from: inData)
-                print(weather);
-
+                weatherData = try! JSONDecoder().decode(AllData.self, from: inData)
             }
-            print("finishing closure closure");
+            self.dataTaskCompletion = true;
+            print("finishing closure");
         })
         
         dataTask.resume();
