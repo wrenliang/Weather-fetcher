@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var titleLabel: UILabel!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +21,7 @@ class ViewController: UIViewController {
         let retrievalURL = try! dataManager.createRetrievalURL(baseURL: API.BaseURL, APIKey: API.Key, city: city);
         
         dataManager.retrieveData(retrievalURL: retrievalURL);
-        print(dataManager.json);
+
     }
 
 

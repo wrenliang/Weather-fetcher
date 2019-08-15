@@ -13,7 +13,6 @@ enum DataManagerError: Error {
 }
 
 final class DataManager {
-    var json: Any?
     
     init() {
     }
@@ -30,9 +29,7 @@ final class DataManager {
     func retrieveData(retrievalURL: URL){
         let session = URLSession.shared
         print("session created");
-        
-        print(retrievalURL);
-        
+
         let dataTask = session.dataTask(with: retrievalURL, completionHandler: {
             (data: Data?, response: URLResponse?, error: Error?) in
             
@@ -40,11 +37,9 @@ final class DataManager {
                 print("Boys we got an error!\n");
                 print(error);
             } else if let inData = data{
-                print("Raw Data: \(inData)");
-                let jsonObj = try? JSONSerialization.jsonObject(with: inData, options: [])
-                self.json = jsonObj;
-                //print(type(of: jsonObj));
-                //print(jsonObj);
+                let weather = try! JSONDecoder().decode(AllData.self, from: inData)
+                print(weather);
+
             }
             print("finishing closure closure");
         })

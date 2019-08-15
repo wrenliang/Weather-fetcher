@@ -7,17 +7,30 @@
 //
 
 import Foundation
-/*
-class WeatherData {
-    let tempK: Double?;
-    let pressure: Double?;
-    let humidity: Double?;
-    let description: String?;
+
+struct AllData: Codable {
+    var main: MainWeatherData
     
-    init?(json: [String: Any]){
+    enum CodingKeys: String, CodingKey{
+        case main = "main"
+    }
+}
+
+
+struct MainWeatherData: Codable {
+    var temperature: Double
+    var tempMax: Double
+    var tempMin: Double
+    var humidity: Double
+    var pressure: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case temperature = "temp"
+        case tempMax = "temp_max"
+        case tempMin = "temp_min"
+        case humidity
+        case pressure
         
     }
-    
-    
 }
-*/
+
