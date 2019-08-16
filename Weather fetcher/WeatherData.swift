@@ -10,10 +10,25 @@ import Foundation
 
 struct AllData: Codable {
     var main: MainWeatherData
+    var weatherDescription: [WeatherDescription]
     
-    enum CodingKeys: String, CodingKey{
+    enum CodingKeys: String, CodingKey {
         case main = "main"
+        case weatherDescription = "weather"
     }
+}
+
+
+struct WeatherDescription: Codable {
+    var id: Int
+    var main, weatherDescription, icon: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id, main
+        case weatherDescription = "description"
+        case icon
+    }
+    
 }
 
 
